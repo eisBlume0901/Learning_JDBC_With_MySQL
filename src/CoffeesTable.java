@@ -76,7 +76,7 @@ public class CoffeesTable
                 Integer total = resultSet.getInt("TOTAL");
 
                 // version 2 - column numbers
-                // String coffeeName = resultSet.getSting(1);
+                // String coffeeNamnande = resultSet.getSting(1);
                 out.println("Coffee name: " +  coffeeName);
                 out.println("Supplied from: " + supplier_ID);
                 out.println("Price: " + price);
@@ -90,4 +90,6 @@ public class CoffeesTable
             sqlException.printStackTrace();
         }
     }
+
+
 }
