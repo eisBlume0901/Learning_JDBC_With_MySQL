@@ -28,6 +28,7 @@ public class CoffeesTable
             Statement statement = this.connection.createStatement();
             statement.executeUpdate(query);
             System.out.println("Created COFFEES table successfully");
+            statement.close();
         }
         catch (SQLException sqlException)
         {

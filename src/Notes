@@ -1,0 +1,8 @@
+Statement - simple SQL statements with no parameters
+PreparedStatement - used for pre-compiling SQL statements that might contain input parameters
+CallableStatement - used to execute stored procedures that may contain both input and output parameters
+
+.execute() -
+.executeQuery() - returns one ResultSet object. Use for SELECT SQL statement
+.executeUpdate() - returns an integer representing the number of rows
+affected by the SQL statement. Used for INSERT, DELETE, or UPDATE SQL statements
