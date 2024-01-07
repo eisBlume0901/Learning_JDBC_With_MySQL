@@ -1,6 +1,6 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
+import static java.lang.System.*;
 
 public class CoffeesTable
 {
@@ -27,8 +27,58 @@ public class CoffeesTable
         {
             Statement statement = this.connection.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Created COFFEES table successfully");
+            out.println("Created COFFEES table successfully");
             statement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void populateCoffeesTable(String COF_NAME, Integer SUP_ID, Double PRICE, Integer SALES, Integer TOTAL)
+    {
+        try
+        {
+            String query = "INSERT INTO COFFEES VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, COF_NAME);
+            preparedStatement.setInt(2, SUP_ID);
+            preparedStatement.setDouble(3, PRICE);
+            preparedStatement.setInt(4, SALES);
+            preparedStatement.setInt(5, TOTAL);
+            preparedStatement.execute();
+            out.println("Entry recorded to COFFEES table successfully");
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void viewCoffeesTable()
+    {
+        try
+        {
+            String query = "SELECT * FROM COFFEES";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next())
+            {
+                String coffeName = resultSet.getString("COF_NAME");
+                Integer supplier_ID = resultSet.getInt("SUP_ID");
+                Double price = resultSet.getDouble("PRICE");
+                Integer sales = resultSet.getInt("SALES");
+                Integer total = resultSet.getInt("TOTAL");
+
+                out.println("Coffee name: " +  coffeName);
+                out.println("Supplied from: " + supplier_ID);
+                out.println("Price: " + price);
+                out.println("Sales: " + sales);
+                out.println("Total: " + total);
+                out.println();
+            }
         }
         catch (SQLException sqlException)
         {
