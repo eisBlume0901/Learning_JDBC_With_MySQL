@@ -1,5 +1,4 @@
 import java.sql.*;
-
 import static java.lang.System.*;
 
 public class CoffeesTable
@@ -64,15 +63,21 @@ public class CoffeesTable
             String query = "SELECT * FROM COFFEES";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            // ResultSet's TYPE_FORWARD_ONLY, CONCUR_READ_ONLY
             while (resultSet.next())
             {
-                String coffeName = resultSet.getString("COF_NAME");
+                // getter methods are case-insensitive if we used column names instead of
+                // column numbers
+                // version 1 - column names
+                String coffeeName = resultSet.getString("COF_NAME");
                 Integer supplier_ID = resultSet.getInt("SUP_ID");
                 Double price = resultSet.getDouble("PRICE");
                 Integer sales = resultSet.getInt("SALES");
                 Integer total = resultSet.getInt("TOTAL");
 
-                out.println("Coffee name: " +  coffeName);
+                // version 2 - column numbers
+                // String coffeeName = resultSet.getSting(1);
+                out.println("Coffee name: " +  coffeeName);
                 out.println("Supplied from: " + supplier_ID);
                 out.println("Price: " + price);
                 out.println("Sales: " + sales);

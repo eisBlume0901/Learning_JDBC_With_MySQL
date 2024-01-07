@@ -6,3 +6,27 @@ CallableStatement - used to execute stored procedures that may contain both inpu
 .executeQuery() - returns one ResultSet object. Use for SELECT SQL statement
 .executeUpdate() - returns an integer representing the number of rows
 affected by the SQL statement. Used for INSERT, DELETE, or UPDATE SQL statements
+
+ResultSet
+- TYPE_FORWARD_ONLY - default type, cannot be scrolled, moves forward only, from
+    before the first row to after the last row (can retrieve data but per next row
+    but cannot do any changes)
+    Methods available: next()
+- TYPE_SCROLL_INSENSITIVE - can be scrolled, moves both forward and backward, allows
+    movement to an absolute position, insensitive to changes in the underlying data source
+    while open (can retrieve data in any row, but cannot do any changes)
+    Methods available: previous(), first(), last(), beforeFirst(), afterLast(), relative(int rows),
+        absolute(int row)
+- TYPE_SCROLL_SENSITIVE - same with TYPE_SCROLL_INSENSITIVE, reflect changes to the underlying
+    data source while open (can retrieve data in any row and do any changes)
+    Methods available: same with TYPE_SCROLL_INSENSITIVE
+- CONCUR_READ_ONLY - default concurrency, cannot be updated using the ResultSet interface
+- CONCUR_UPDATABLE - can be updated using the ResultSet interface
+
+ResultSet vs ResultSetMetaData
+ResultSetMetaData - focuses solely on providing information about the structure of the
+result set, such as column names, types, sizes, and other metadata related to the columns,
+without dealing with the actual data contained within those columns.
+
+ResultSet - actual result retrieved from the database
+ResultSetMetaData - metadata about the result set structure
