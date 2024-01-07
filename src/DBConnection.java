@@ -5,15 +5,23 @@ import static java.lang.System.*;
 
 public class DBConnection
 {
-    static String userName = "root";
-    static String password = "";
-    static String databaseType = "mysql";
-    static String serverName = "localhost";
-    static int portNumber = 3306;
-    static Connection connection = null;
+    private String userName;
+    private String password;
+    private String databaseType;
+    private String serverName;
+    private int portNumber;
+    private Connection connection;
 
-    static String databaseName = "jdbc_tutorial_coffee_ms";
-    public Connection getConnection()
+    public DBConnection()
+    {
+        userName = "root";
+        password = "";
+        databaseType = "mysql";
+        serverName = "localhost";
+        portNumber = 3306;
+        connection = null;
+    }
+    public Connection getConnection(String databaseName)
     {
         try
         {

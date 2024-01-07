@@ -5,11 +5,13 @@ public class Main
     public static void main(String[] args)
     {
         DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
+        String databaseName = "jdbc_tutorial_coffee_ms";
+        Connection connection = dbConnection.getConnection(databaseName);
 
         SuppliersTable suppliersTable = new SuppliersTable(connection);
         suppliersTable.createSuppliersTable();
-//        CoffeesTable coffeesTable = new CoffeesTable(connection);
-//        coffeesTable.createCoffeeTable();
+
+        CoffeesTable coffeesTable = new CoffeesTable(connection);
+        coffeesTable.createCoffeeTable();
     }
 }
