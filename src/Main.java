@@ -14,6 +14,7 @@ public class Main
 //        suppliersTable.populateSuppliersTable(101, "Acme, Inc.", "99 Market Street", "Groundsville", "CA", "95199");
 //        suppliersTable.populateSuppliersTable(150, "The High Ground", "100 Coffee Lane", "Meadows", "CA", "93966");
         suppliersTable.retrieveMetaDataFromSuppliersResultSet();
+        suppliersTable.testResultSetType_Scroll_Sensitive_methods();
 
         CoffeesTable coffeesTable = new CoffeesTable(connection);
 //        coffeesTable.createCoffeeTable();
