@@ -47,3 +47,7 @@ ResultSet insertRow()
 and then updated in the database together
 - if you need manipulate or transform data from various sources before inserting it
 into the ResultSet, using insertRow() might be more convenient.
+
+
+.setAutoCommit() - to ensure that the changes made to the database
+are permanent and cannot be lost due to system failure or other issues.

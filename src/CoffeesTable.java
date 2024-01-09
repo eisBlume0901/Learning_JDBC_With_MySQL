@@ -1,4 +1,7 @@
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.lang.System.*;
 
 public class CoffeesTable
@@ -91,5 +94,43 @@ public class CoffeesTable
         }
     }
 
+    public void updateCoffeeSales(Map<String, Integer> salesForWeek)
+    {
+        String updateSalesQuery = "UPDATE COFFEES SET SALES = ? WHERE COF_NAME = ?";
+        String updateTotalQuery = "UPDATE COFFEES SET TOTAL = TOTAL + ? WHERE COF_NAME = ?";
+
+        try
+        {
+            PreparedStatement preparedStatementSales = connection.prepareStatement(updateSalesQuery);
+            PreparedStatement preparedStatementTotal = connection.prepareStatement(updateTotalQuery);
+
+            connection.setAutoCommit(false);
+            /*
+            setAutoCommit(false) - so that the changes is not automatically committed to the
+            database and can be rolled back. We only put the commit to true once we have finished
+            doing the transaction.
+             */
+
+            for (Map.Entry<String, Integer> e : salesForWeek.entrySet())
+            {
+                preparedStatementSales.setInt(1, e.getValue());
+                preparedStatementSales.setString(2, e.getKey());
+                preparedStatementSales.executeUpdate();
+
+                preparedStatementTotal.setInt(1, e.getValue());
+                preparedStatementTotal.setString(2, e.getKey());
+                preparedStatementTotal.executeUpdate();
+
+                out.println("Updated Sales and Total for " + e.getKey());
+                connection.commit();
+            }
+
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+
+    }
 
 }
